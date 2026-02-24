@@ -3,10 +3,10 @@
 This checklist outlines the remaining implementation steps to reach full project capabilities for research and production.
 
 ## Tier 1: Foundation (Spatial SFT & Layout)
-- [ ] **Custom Manim Base Class**: Create a `MVLDScene` that automatically logs all mobjects, their positions, colors, and bounding boxes to a `scene_graph.json` upon rendering.
-- [ ] **TikZ/SVG Layout Pretraining**: Implement data loaders for TikZ/SVG datasets to teach the model basic 2D spatial relationships.
-- [ ] **Coordinate-Augmented SFT**: Update the SFT pipeline to include explicit coordinate annotations (e.g., `[0.5, 0.2]`) in the prompt/code training pairs.
-- [ ] **Synthetic Data Generator**: Build a script to generate thousands of simple scene variations (e.g., "3 circles of different sizes") to boost spatial awareness.
+- [x] **Custom Manim Base Class**: Create a `MVLDScene` that automatically logs all mobjects, their positions, colors, and bounding boxes to a `scene_graph.json` upon rendering.
+- [x] **TikZ/SVG Layout Pretraining**: Implement data loaders for TikZ/SVG datasets to teach the model basic 2D spatial relationships.
+- [x] **Coordinate-Augmented SFT**: Update the SFT pipeline to include explicit coordinate annotations (e.g., `[0.5, 0.2]`) in the prompt/code training pairs.
+- [x] **Synthetic Data Generator**: Build a script to generate thousands of simple scene variations (e.g., "3 circles of different sizes") to boost spatial awareness.
 
 ## Tier 2: Drift Reduction (Rejection & Contrastive Flow)
 - [ ] **Full RFT Integration**: Automate the generate -> render -> score -> fine-tune loop using the existing RFT pipeline.
