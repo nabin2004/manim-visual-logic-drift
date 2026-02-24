@@ -10,19 +10,29 @@ class MVLDDataset:
     def __init__(self, data_path: str = None):
         self.data_path = Path(data_path) if data_path else None
 
-    def create_dummy_dataset(self, num_samples: int = 5) -> Dataset:
+    def create_dummy_dataset(self, num_samples: int = 5, augment: bool = True) -> Dataset:
         """
         Creates a dummy dataset for testing the pipeline.
         """
+        from mvld.data.augmenter import CoordinateAugmenter
+        augmenter = CoordinateAugmenter()
+        
         data = []
         for i in range(num_samples):
+            instruction = f"Draw a blue square and a red circle at index {i}."
+            code = "from mvld.sandbox.base import MVLDScene\nfrom manim import *\nclass Scene(MVLDScene):\n    def construct(self):\n        self.add(Square(color=BLUE).shift(LEFT))\n        self.add(Circle(color=RED).shift(RIGHT))"
+            
+            if augment:
+                instruction = augmenter.augment_instruction(instruction, code)
+                
             data.append({
-                "instruction": f"Draw a blue square and a red circle at index {i}.",
-                "code": "from mvld.sandbox.base import MVLDScene\nfrom manim import *\nclass Scene(MVLDScene):\n    def construct(self):\n        self.add(Square(color=BLUE).shift(LEFT))\n        self.add(Circle(color=RED).shift(RIGHT))",
-                "metadata": {"source": "synthetic"}
+                "instruction": instruction,
+                "code": code,
+                "metadata": {"source": "synthetic", "augmented": augment}
             })
         
         return Dataset.from_list(data)
+
 
 
     def save_to_jsonl(self, dataset: List[Dict[str, Any]], output_path: str):
