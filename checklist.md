@@ -18,10 +18,10 @@ This checklist outlines the remaining implementation steps to reach full project
 - [/] **Online DPO/PPO**: Implement a real-time RL loop where the model learns from visual feedback during the training process.
 - [x] **VLM-as-Judge**: Integrate a Vision-Language Model (like Claude 3.5 Sonnet or GPT-4o) to provide qualitative rewards (e.g., "The objects overlap awkwardly").
 - [x] **Multi-Agent Refinement Loop**: Build a "Coder + Critic" system where the Critic agent sees the render and suggests code fixes to the Coder.
-- [/] **MCTS for Manim**: Implement Monte Carlo Tree Search for planning complex animation sequences.
+- [x] **MCTS for Manim**: Implement Monte Carlo Tree Search for planning complex animation sequences.
 
 ## Evaluation & Infrastructure
-- [ ] **Object Count Scorer**: Use a simple heuristic or a small object detection model to verify the number of objects in the frame matches the prompt.
+- [/] **Object Count Scorer**: Use a simple heuristic or a small object detection model to verify the number of objects in the frame matches the prompt.
 - [ ] **Animation Order Verification**: Extract frame-by-frame scene graphs to ensure objects appear in the order specified in the instruction.
 - [ ] **CLIP-Directional Similarity**: Measure if the *change* in the prompt (e.g., "moving left") matches the *change* in the visual output.
 - [ ] **Benchmark Dataset**: Curate a "MVLD-Bench" with 100+ high-quality Manim prompts across 5 categories of complexity.
