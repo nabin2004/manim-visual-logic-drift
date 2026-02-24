@@ -45,23 +45,40 @@ class ManimSandbox:
             error_log = result.stderr if not success else ""
             
             # Find the output image
-            # Manim usually puts it in media/images/<script_name>/<scene_name>.png
             image_path = self._find_latest_image(script_path.stem)
+            
+            # Find and load scene graph
+            scene_graph = self._load_scene_graph()
 
             return {
                 "success": success,
                 "error": error_log,
                 "image_path": str(image_path) if image_path else None,
+                "scene_graph": scene_graph,
                 "stdout": result.stdout
             }
         except Exception as e:
             return {
                 "success": False,
                 "error": str(e),
-                "image_path": None
+                "image_path": None,
+                "scene_graph": None
             }
 
+    def _load_scene_graph(self) -> Optional[List[Dict[str, Any]]]:
+        # Path is defined in MVLDScene.extract_scene_graph
+        graph_path = self.output_dir / "scene_graph.json"
+        if not graph_path.exists():
+            return None
+        
+        try:
+            with open(graph_path, "r") as f:
+                return json.load(f)
+        except:
+            return None
+
     def _find_latest_image(self, script_stem: str) -> Optional[Path]:
+
         image_dir = self.output_dir / "images" / script_stem
         if not image_dir.exists():
             return None

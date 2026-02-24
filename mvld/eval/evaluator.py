@@ -36,13 +36,28 @@ class SpatialEvaluator:
     Evaluates layout and spatial constraints.
     """
     def evaluate(self, scene_graph: List[Dict[str, Any]], expected_constraints: Dict[str, Any]) -> Dict[str, Any]:
-        # Placeholder for complex spatial logic
-        # e.g., "blue square should be to the left of red circle"
+        """
+        Evaluates the scene graph against constraints.
+        """
+        if not scene_graph:
+            return {"spatial_drift_score": 1.0, "error": "No scene graph data"}
+
+        # Basic check: Object count
+        obj_count = len(scene_graph)
+        expected_count = expected_constraints.get("min_objects", 1)
+        
+        count_met = obj_count >= expected_count
+        
+        # Simple scoring based on count
+        drift_score = 0.0 if count_met else 1.0
+
         return {
-            "spatial_drift_score": 0.0,
-            "constraints_met": True,
-            "details": "Spatial evaluation logic is currently a placeholder."
+            "spatial_drift_score": drift_score,
+            "object_count": obj_count,
+            "constraints_met": count_met,
+            "mobjects": [m["type"] for m in scene_graph]
         }
+
 
 class VisualEvaluator:
     def __init__(self, device: str = None):
@@ -57,8 +72,14 @@ class VisualEvaluator:
         if scene_graph:
             spatial_results = self.spatial_evaluator.evaluate(scene_graph, {})
             
+        # Combine scores (heuristic: penalize CLIP score if spatial constraints fail)
+        final_score = clip_score
+        if spatial_results.get("spatial_drift_score", 0.0) > 0:
+            final_score *= 0.5 # Penalty for spatial drift
+
         return {
             "clip_similarity": clip_score,
             "spatial": spatial_results,
-            "overall_score": clip_score # Simplified for now
+            "overall_score": final_score
         }
+

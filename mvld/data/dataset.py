@@ -18,11 +18,12 @@ class MVLDDataset:
         for i in range(num_samples):
             data.append({
                 "instruction": f"Draw a blue square and a red circle at index {i}.",
-                "code": "from manim import *\nclass Scene(Scene):\n    def construct(self):\n        self.add(Square(color=BLUE).shift(LEFT))\n        self.add(Circle(color=RED).shift(RIGHT))",
+                "code": "from mvld.sandbox.base import MVLDScene\nfrom manim import *\nclass Scene(MVLDScene):\n    def construct(self):\n        self.add(Square(color=BLUE).shift(LEFT))\n        self.add(Circle(color=RED).shift(RIGHT))",
                 "metadata": {"source": "synthetic"}
             })
         
         return Dataset.from_list(data)
+
 
     def save_to_jsonl(self, dataset: List[Dict[str, Any]], output_path: str):
         with jsonlines.open(output_path, mode='w') as writer:

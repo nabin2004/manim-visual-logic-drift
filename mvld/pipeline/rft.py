@@ -46,8 +46,10 @@ class RFTPipeline:
                 if render_res["success"] and render_res["image_path"]:
                     score_res = self.evaluator.evaluate_render(
                         render_res["image_path"], 
-                        instruction
+                        instruction,
+                        scene_graph=render_res.get("scene_graph")
                     )
+
                 
                 # 3. Collect
                 entry = {
