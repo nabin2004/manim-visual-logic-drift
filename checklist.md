@@ -12,10 +12,10 @@ This checklist outlines the remaining implementation steps to reach full project
 - [x] **Full RFT Integration**: Automate the generate -> render -> score -> fine-tune loop using the existing RFT pipeline.
 - [x] **Error-Seeded Contrastive Pairs**: Implement a system that takes working code, introduces a "visual bug" (e.g., changing `LEFT` to `RIGHT`), and uses both as a contrastive pair.
 - [x] **DPO Implementation**: Setup the Direct Preference Optimization (DPO) trainer using code-render pairs where the "preferred" sample is the one with the highest CLIP score.
-- [/] **Negative Mining**: Identify samples where the code runs (exit code 0) but the CLIP score is low (< 0.6) to specifically target visual drift.
+- [x] **Negative Mining**: Identify samples where the code runs (exit code 0) but the CLIP score is low (< 0.6) to specifically target visual drift.
 
 ## Tier 3: Advanced Pipeline (Online RL & Tooling)
-- [ ] **Online DPO/PPO**: Implement a real-time RL loop where the model learns from visual feedback during the training process.
+- [/] **Online DPO/PPO**: Implement a real-time RL loop where the model learns from visual feedback during the training process.
 - [ ] **VLM-as-Judge**: Integrate a Vision-Language Model (like Claude 3.5 Sonnet or GPT-4o) to provide qualitative rewards (e.g., "The objects overlap awkwardly").
 - [ ] **Multi-Agent Refinement Loop**: Build a "Coder + Critic" system where the Critic agent sees the render and suggests code fixes to the Coder.
 - [ ] **MCTS for Manim**: Implement Monte Carlo Tree Search for planning complex animation sequences.
