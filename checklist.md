@@ -9,8 +9,8 @@ This checklist outlines the remaining implementation steps to reach full project
 - [x] **Synthetic Data Generator**: Build a script to generate thousands of simple scene variations (e.g., "3 circles of different sizes") to boost spatial awareness.
 
 ## Tier 2: Drift Reduction (Rejection & Contrastive Flow)
-- [ ] **Full RFT Integration**: Automate the generate -> render -> score -> fine-tune loop using the existing RFT pipeline.
-- [ ] **Error-Seeded Contrastive Pairs**: Implement a system that takes working code, introduces a "visual bug" (e.g., changing `LEFT` to `RIGHT`), and uses both as a contrastive pair.
+- [x] **Full RFT Integration**: Automate the generate -> render -> score -> fine-tune loop using the existing RFT pipeline.
+- [/] **Error-Seeded Contrastive Pairs**: Implement a system that takes working code, introduces a "visual bug" (e.g., changing `LEFT` to `RIGHT`), and uses both as a contrastive pair.
 - [ ] **DPO Implementation**: Setup the Direct Preference Optimization (DPO) trainer using code-render pairs where the "preferred" sample is the one with the highest CLIP score.
 - [ ] **Negative Mining**: Identify samples where the code runs (exit code 0) but the CLIP score is low (< 0.6) to specifically target visual drift.
 
