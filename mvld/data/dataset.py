@@ -2,6 +2,8 @@ from datasets import Dataset
 import jsonlines
 from pathlib import Path
 from typing import List, Dict, Any
+import random
+
 
 class MVLDDataset:
     """
@@ -35,7 +37,37 @@ class MVLDDataset:
 
 
 
+    def generate_bulk_synthetic(self, num_samples: int = 100) -> Dataset:
+        """
+        Generates a large number of synthetic samples using the generator.
+        """
+        from mvld.data.generator import SyntheticGenerator
+        from mvld.data.augmenter import CoordinateAugmenter
+        
+        gen = SyntheticGenerator()
+        augmenter = CoordinateAugmenter()
+        data = []
+        
+        for i in range(num_samples):
+            # Mix random and relational scenes
+            if random.random() > 0.3:
+                sample = gen.generate_random_scene(num_objects=random.randint(1, 4))
+            else:
+                sample = gen.generate_relational_scene()
+            
+            # Augment with coordinates
+            sample["instruction"] = augmenter.augment_instruction(sample["instruction"], sample["code"])
+            
+            data.append({
+                "instruction": sample["instruction"],
+                "code": sample["code"],
+                "metadata": {"id": i, "source": "synthetic_bulk"}
+            })
+            
+        return Dataset.from_list(data)
+
     def save_to_jsonl(self, dataset: List[Dict[str, Any]], output_path: str):
+
         with jsonlines.open(output_path, mode='w') as writer:
             writer.write_all(dataset)
 
