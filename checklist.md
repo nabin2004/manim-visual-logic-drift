@@ -24,11 +24,11 @@ This checklist outlines the remaining implementation steps to reach full project
 - [x] **Object Count Scorer**: Use a simple heuristic or a small object detection model to verify the number of objects in the frame matches the prompt.
 - [x] **Animation Order Verification**: Extract frame-by-frame scene graphs to ensure objects appear in the order specified in the instruction.
 - [x] **CLIP-Directional Similarity**: Measure if the *change* in the prompt (e.g., "moving left") matches the *change* in the visual output.
-- [/] **Benchmark Dataset**: Curate a "MVLD-Bench" with 100+ high-quality Manim prompts across 5 categories of complexity.
+- [x] **Benchmark Dataset**: Curate a "MVLD-Bench" with 100+ high-quality Manim prompts across 5 categories of complexity.
 - [x] **WandB Logging Integration**: Set up experiment tracking to visualize training progress and visual reward distributions.
 
 ## Research & Presentation
-- [ ] **Visualization Dashboard**: Create a simple web dashboard (e.g., Streamlit) to browse code, renders, and their corresponding scores.
-- [ ] **Structured Experiment Tracking**: Integrate `WandB` or `MLflow` to track CLIP scores and win rates across different model versions.
-- [ ] **Ablation Study CLI**: Commands to run training with/without specific reward signals (CLIP vs. Spatial vs. Exec).
-- [ ] **Paper-Ready Export**: Ensure all result JSONs contain sufficient metadata for generating LaTeX tables and performance plots.
+- [x] **Visualization Dashboard**: Create a simple web dashboard (e.g., Streamlit) to browse code, renders, and their corresponding scores.
+- [x] **Structured Experiment Tracking**: Integrate `WandB` or `MLflow` to track CLIP scores and win rates across different model versions.
+- [x] **Ablation Study CLI**: Commands to run training with/without specific reward signals (CLIP vs. Spatial vs. Exec).
+- [x] **Paper-Ready Export**: Ensure all result JSONs contain sufficient metadata for generating LaTeX tables and performance plots.

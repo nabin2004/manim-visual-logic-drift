@@ -1,0 +1,27 @@
+[
+    {
+        "category": "Basic Spatial",
+        "prompt": "Draw a large red circle on the far left and a small blue square on the far right.",
+        "complexity": 1
+    },
+    {
+        "category": "Relational",
+        "prompt": "Place a green triangle directly above a yellow star.",
+        "complexity": 2
+    },
+    {
+        "category": "Animation",
+        "prompt": "Create a circle that moves from the center to the top-right corner over 2 seconds.",
+        "complexity": 3
+    },
+    {
+        "category": "Grouping",
+        "prompt": "Arrange 5 white dots in a pentagon shape around the origin.",
+        "complexity": 4
+    },
+    {
+        "category": "Advanced",
+        "prompt": "Draw a blue rectangle, then transform it into a red circle while it moves downwards.",
+        "complexity": 5
+    }
+]
