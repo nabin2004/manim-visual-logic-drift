@@ -1,41 +1,52 @@
 # Manim Visual Logic Drift (MVLD) Post-Training System
 
-Fixing visual logic drift in Manim code generation where code runs but renders the wrong scene.
+Fixing visual logic drift in Manim code generation by grounding models in visual and spatial feedback.
 
-## Core Features
+## 🚀 Quick Start
 
-- **Manim Execution Sandbox**: Isolated rendering of Manim code with metadata capture.
-- **Visual Evaluation**: CLIP-based similarity scores between prompt and rendered frame.
-- **RFT Baseline**: Rejection Fine-Tuning pipeline for collecting high-quality code-render pairs.
-- **Structured CLI**: Powerful commands for rendering, evaluation, and training.
-
-## Installation
-
+### 1. Setup Environment
 ```bash
 make setup
-source venv/bin/activate
 ```
 
-## Usage
-
-### Render a script
+### 2. Generate Synthetic Training Data
 ```bash
-mvld render file --script samples/simple_scene.py
+make gen-data
 ```
 
-### Evaluate visual similarity
+### 3. Run Post-Training Algorithms
 ```bash
-mvld evaluate visual --prompt "A blue square and a red circle" --image media/images/simple_scene/SimpleScene.png
+# Run RFT (Rejection Fine-Tuning)
+make train-rft
+
+# Run generic algorithm from the registry
+mvld train algorithm rft --num-samples 10
 ```
 
-### Run RFT Baseline
+### 4. Visualize Results
 ```bash
-mvld train rft --num-samples 5
+make dashboard
 ```
 
-## Project Structure
+## 🛠 Features
 
-- `mvld/sandbox/`: Execution and scene graph extraction.
-- `mvld/eval/`: CLIP and spatial metrics.
-- `mvld/pipeline/`: Training pipelines (RFT, DPO).
-- `mvld/cli/`: CLI implementation.
+- **Isolated Execution**: `ManimSandbox` for safe code rendering.
+- **Visual Grounding**: CLIP-based visual alignment & VLM-as-Judge qualitative feedback.
+- **Extensible Architecture**: Registry-based plugin system for new algorithms and evaluators.
+- **Spatial Awareness**: Coordinate-augmented SFT and automated scene graph extraction.
+
+## 📁 Project Structure
+
+- `mvld/sandbox/`: Rendering and metadata extraction.
+- `mvld/eval/`: Evaluator suite (CLIP, Spatial, VLM, Directional).
+- `mvld/pipeline/`: Training pipelines (RFT, SFT, DPO, MCTS, Refinement).
+- `mvld/data/`: Loaders (TikZ, SVG), generators, and augmenters.
+- `docs/DEVELOPMENT.md`: Guide for adding new algorithms.
+
+## 📊 Research Automation
+
+Use the `Makefile` for streamlined research workflows:
+- `make evaluate`: Score the latest renders.
+- `make report`: Generate summary performance metrics.
+- `make test`: Run the verification suite.
+- `make lint`: Maintain code quality.
