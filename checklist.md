@@ -11,8 +11,8 @@ This checklist outlines the remaining implementation steps to reach full project
 ## Tier 2: Drift Reduction (Rejection & Contrastive Flow)
 - [x] **Full RFT Integration**: Automate the generate -> render -> score -> fine-tune loop using the existing RFT pipeline.
 - [x] **Error-Seeded Contrastive Pairs**: Implement a system that takes working code, introduces a "visual bug" (e.g., changing `LEFT` to `RIGHT`), and uses both as a contrastive pair.
-- [/] **DPO Implementation**: Setup the Direct Preference Optimization (DPO) trainer using code-render pairs where the "preferred" sample is the one with the highest CLIP score.
-- [ ] **Negative Mining**: Identify samples where the code runs (exit code 0) but the CLIP score is low (< 0.6) to specifically target visual drift.
+- [x] **DPO Implementation**: Setup the Direct Preference Optimization (DPO) trainer using code-render pairs where the "preferred" sample is the one with the highest CLIP score.
+- [/] **Negative Mining**: Identify samples where the code runs (exit code 0) but the CLIP score is low (< 0.6) to specifically target visual drift.
 
 ## Tier 3: Advanced Pipeline (Online RL & Tooling)
 - [ ] **Online DPO/PPO**: Implement a real-time RL loop where the model learns from visual feedback during the training process.
