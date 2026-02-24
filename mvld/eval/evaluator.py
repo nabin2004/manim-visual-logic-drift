@@ -44,19 +44,31 @@ class SpatialEvaluator:
 
         # Basic check: Object count
         obj_count = len(scene_graph)
-        expected_count = expected_constraints.get("min_objects", 1)
+        expected_count = expected_constraints.get("count")
         
-        count_met = obj_count >= expected_count
+        counts_match = True
+        if expected_count is not None:
+            counts_match = obj_count == expected_count
+
+        # Heuristic: Compare specific types if requested
+        type_constraints = expected_constraints.get("types", {})
+        type_match = True
+        for t, count in type_constraints.items():
+            actual = len([m for m in scene_graph if m["type"].lower() == t.lower()])
+            if actual != count:
+                type_match = False
+                break
         
-        # Simple scoring based on count
-        drift_score = 0.0 if count_met else 1.0
+        drift_score = 0.0 if (counts_match and type_match) else 1.0
 
         return {
             "spatial_drift_score": drift_score,
             "object_count": obj_count,
-            "constraints_met": count_met,
+            "counts_match": counts_match,
+            "type_match": type_match,
             "mobjects": [m["type"] for m in scene_graph]
         }
+
 
 
 class VisualEvaluator:

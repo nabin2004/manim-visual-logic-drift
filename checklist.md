@@ -21,8 +21,8 @@ This checklist outlines the remaining implementation steps to reach full project
 - [x] **MCTS for Manim**: Implement Monte Carlo Tree Search for planning complex animation sequences.
 
 ## Evaluation & Infrastructure
-- [/] **Object Count Scorer**: Use a simple heuristic or a small object detection model to verify the number of objects in the frame matches the prompt.
-- [ ] **Animation Order Verification**: Extract frame-by-frame scene graphs to ensure objects appear in the order specified in the instruction.
+- [x] **Object Count Scorer**: Use a simple heuristic or a small object detection model to verify the number of objects in the frame matches the prompt.
+- [x] **Animation Order Verification**: Extract frame-by-frame scene graphs to ensure objects appear in the order specified in the instruction.
 - [ ] **CLIP-Directional Similarity**: Measure if the *change* in the prompt (e.g., "moving left") matches the *change* in the visual output.
 - [ ] **Benchmark Dataset**: Curate a "MVLD-Bench" with 100+ high-quality Manim prompts across 5 categories of complexity.
 
