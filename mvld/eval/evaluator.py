@@ -3,8 +3,10 @@ import clip
 from PIL import Image
 from pathlib import Path
 from typing import List, Union, Dict, Any
+from mvld.eval.base import BaseEvaluator, EvaluatorRegistry
 
-class CLIPScorer:
+@EvaluatorRegistry.register("clip")
+class CLIPScorer(BaseEvaluator):
     def __init__(self, model_name: str = "ViT-B/32", device: str = None):
         if device is None:
             self.device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -31,7 +33,8 @@ class CLIPScorer:
         similarity = (100.0 * image_features @ text_features.T).item()
         return similarity
 
-class SpatialEvaluator:
+@EvaluatorRegistry.register("spatial")
+class SpatialEvaluator(BaseEvaluator):
     """
     Evaluates layout and spatial constraints.
     """

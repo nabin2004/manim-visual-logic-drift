@@ -7,10 +7,12 @@ from rich.progress import Progress
 from mvld.sandbox.executor import ManimSandbox
 from mvld.eval.evaluator import VisualEvaluator
 from mvld.data.dataset import MVLDDataset
+from mvld.pipeline.base import BasePipeline, PipelineRegistry
 
 console = Console()
 
-class RFTPipeline:
+@PipelineRegistry.register("rft")
+class RFTPipeline(BasePipeline):
     def __init__(self, output_dir: str = "results/rft"):
         self.output_dir = Path(output_dir)
         self.output_dir.mkdir(parents=True, exist_ok=True)

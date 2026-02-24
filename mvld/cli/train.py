@@ -1,17 +1,15 @@
 import typer
+from mvld.pipeline.base import PipelineRegistry
 
 app = typer.Typer()
 
-@app.command()
-def rft(
-    num_samples: int = typer.Option(5, "--num-samples", "-n", help="Number of samples to process"),
-    output_dir: str = typer.Option("results/rft", "--output-dir", "-o", help="Output directory"),
+@app.command("algorithm")
+def run_pipeline(
+    name: str = typer.Argument(..., help="Algorithm name from registry"),
+    num_samples: int = typer.Option(10, "--num-samples", "-n", help="Number of samples to process"),
+    rft_threshold: float = typer.Option(0.7, "--rft-threshold", "-t", help="Threshold for RFT algorithm"),
 ):
-    """
-    Run Rejection Fine-Tuning pipeline.
-    """
-    from mvld.pipeline.rft import RFTPipeline
-    
-    pipeline = RFTPipeline(output_dir=output_dir)
-    pipeline.run_baseline(num_samples=num_samples)
-
+    """Run a specific training algorithm from the registry."""
+    pipeline = PipelineRegistry.get(name)
+    pipeline.run(num_samples=num_samples, threshold=rft_threshold)
+```
